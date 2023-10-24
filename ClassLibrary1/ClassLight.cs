@@ -8,17 +8,13 @@ namespace FlashlightsPlus
 	{
 		static void Postfix(PLPlayerController __instance)
 		{
-			bool flag = Global.LColor == 2;
-			if (flag)
+			if (Global.LColor == 2 && __instance.MyPawn.Flashlight.color != PLPlayer.GetClassColorFromID(__instance.MyPawn.MyPlayer.GetClassID()))
 			{
-				bool flag2 = __instance.MyPawn.Flashlight.color != PLPlayer.GetClassColorFromID(__instance.MyPawn.MyPlayer.GetClassID());
-				if (flag2)
-				{
-					__instance.MyPawn.Flashlight.color = PLPlayer.GetClassColorFromID(__instance.MyPawn.MyPlayer.GetClassID());
-				}
+				__instance.MyPawn.Flashlight.color = PLPlayer.GetClassColorFromID(__instance.MyPawn.MyPlayer.GetClassID());
 			}
-			bool enabled = XRSettings.enabled;
-			if (enabled)
+
+
+			if (XRSettings.enabled)
 			{
 				__instance.MyPawn.Flashlight.spotAngle = 360f;
 				__instance.MyPawn.Flashlight.range = 60f;
@@ -26,12 +22,12 @@ namespace FlashlightsPlus
 			}
 			else
 			{
-				__instance.MyPawn.Flashlight.spotAngle = 56.5f + (float)(20 * (Global.LSize - 1));
-				__instance.MyPawn.Flashlight.range = 60f - (float)(30 * (Global.LSize - 1));
-				bool flag3 = Global.LSize != 0;
-				if (flag3)
+				__instance.MyPawn.Flashlight.spotAngle = 56.5f + 20 * (Global.LSize - 1);
+				__instance.MyPawn.Flashlight.range = 60f - 30 * (Global.LSize - 1);
+
+				if (Global.LSize != 0)
 				{
-					__instance.MyPawn.Flashlight.intensity = 2f / (float)Global.LSize;
+					__instance.MyPawn.Flashlight.intensity = 2f / Global.LSize;
 				}
 				else
 				{

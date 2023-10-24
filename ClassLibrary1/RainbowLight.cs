@@ -30,13 +30,13 @@ namespace FlashlightsPlus
 			array2[1].alpha = 1f;
 			array2[1].time = 1f;
 			gradient.SetKeys(array, array2);
-			bool flag = Global.LColor == 1;
-			if (flag)
+
+			if (Global.LColor == 1)
 			{
 				___MyPawn.Flashlight.color = gradient.Evaluate(num);
 			}
-			bool enabled = XRSettings.enabled;
-			if (enabled)
+
+			if (XRSettings.enabled)
 			{
 				___MyPawn.Flashlight.spotAngle = 360f;
 				___MyPawn.Flashlight.range = 60f;
@@ -44,12 +44,11 @@ namespace FlashlightsPlus
 			}
 			else
 			{
-				___MyPawn.Flashlight.spotAngle = 56.5f + (float)(20 * (Global.LSize - 1));
-				___MyPawn.Flashlight.range = 60f - (float)(30 * (Global.LSize - 1));
-				bool flag2 = Global.LSize != 0;
-				if (flag2)
+				___MyPawn.Flashlight.spotAngle = 56.5f + 20 * (Global.LSize - 1);
+				___MyPawn.Flashlight.range = 60f - 30 * (Global.LSize - 1);
+				if (Global.LSize != 0)
 				{
-					___MyPawn.Flashlight.intensity = 2f / (float)Global.LSize;
+					___MyPawn.Flashlight.intensity = 2f / Global.LSize;
 				}
 				else
 				{
