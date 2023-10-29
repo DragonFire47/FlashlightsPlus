@@ -7,18 +7,18 @@ namespace FlashlightsPlus
     [HarmonyPatch(typeof(PLPlayerController), "HandleFlashlight")]
 	class FlashlightPatch
 	{
-		static void Postfix(PLPawn __MyPawn)
+		static void Postfix(PLPawn ___MyPawn)
 		{
 			if (XRSettings.enabled)
 			{
-				__MyPawn.Flashlight.spotAngle = 360f;
-				__MyPawn.Flashlight.range = 60f;
-				__MyPawn.Flashlight.intensity = 1f;
+				___MyPawn.Flashlight.spotAngle = 360f;
+				___MyPawn.Flashlight.range = 60f;
+				___MyPawn.Flashlight.intensity = 1f;
 			}
 			else
 			{
-                __MyPawn.Flashlight.spotAngle = 56.5f;// + 20 * (Global.LSize - 1);
-                __MyPawn.Flashlight.range = 60f - 30;// * (Global.LSize - 1);
+                ___MyPawn.Flashlight.spotAngle = 56.5f + 20 * (Global.LSize - 1);
+                ___MyPawn.Flashlight.range = 60f - 30;// * (Global.LSize - 1);
 
                 /*
 				if (Global.LSize != 0)
@@ -56,15 +56,15 @@ namespace FlashlightsPlus
                 array2[1].time = 1f;
                 gradient.SetKeys(array, array2);
 
-                __MyPawn.Flashlight.color = gradient.Evaluate(num);
+                ___MyPawn.Flashlight.color = gradient.Evaluate(num);
             }
-            else if (Global.LColor == 2 && __MyPawn.Flashlight.color != PLPlayer.GetClassColorFromID(__MyPawn.MyPlayer.GetClassID()))
+            else if (Global.LColor == 2 && ___MyPawn.Flashlight.color != PLPlayer.GetClassColorFromID(___MyPawn.MyPlayer.GetClassID()))
             {
-                __MyPawn.Flashlight.color = PLPlayer.GetClassColorFromID(__MyPawn.MyPlayer.GetClassID());
+                ___MyPawn.Flashlight.color = PLPlayer.GetClassColorFromID(___MyPawn.MyPlayer.GetClassID());
             }
             else //if (Global.LColor == 0)
             {
-                __MyPawn.Flashlight.color = Color.white;
+                ___MyPawn.Flashlight.color = Color.white;
             }
         }
 	}
